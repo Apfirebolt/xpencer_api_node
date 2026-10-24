@@ -105,13 +105,11 @@ router.route("/:id/invite").post(protect, inviteUserToRoom);
  *     responses:
  *       200:
  *         description: Room details retrieved successfully
- *       404:
- *         description: Room not found
  *       403:
- *         description: Not authorized to update this room
+ *         description: Not authorized to view this room
  *       404:
  *         description: Room not found
- *   update:
+ *   put:
  *     summary: Update expense room details (creator only)
  *     tags: [Expense Rooms]
  *     security:

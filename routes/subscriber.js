@@ -136,7 +136,7 @@ router.post('/unsubscribe', unsubscribeUser)
  *                   type: integer
  *                   example: 10
  *                 subscribers:
- *amos               type: array
+ *                   type: array
  *                   items:
  *                     $ref: '#/components/schemas/SubscriberResponse'
  *       401:

@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import morgan from "morgan";
 import swaggerUi from 'swagger-ui-express';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { swaggerSpec, swaggerUiOptions } from './config/swagger.js';
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
@@ -21,6 +23,10 @@ import budgetModeRoutes from "./routes/budgetMode.js";
 import subscriberRoutes from "./routes/subscriber.js";
 
 dotenv.config();
+
+// Resolve directory paths for ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Connect to MongoDB (handles serverless connection caching inside db.js)
 connectDB();
@@ -68,8 +74,9 @@ app.use("/api/recurring", recurringRoutes);
 app.use("/api/budget-mode", budgetModeRoutes);
 app.use("/api/subscribers", subscriberRoutes);
 
+// Serve HTML template at root
 app.get("/", (req, res) => {
-  res.send("API is running....");
+  res.sendFile(path.join(__dirname, "templates", "index.html"));
 });
 
 app.use(notFound);
